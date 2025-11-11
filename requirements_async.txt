@@ -1,0 +1,10 @@
+# Dependencies untuk BPN Tile Downloader
+
+# Core dependencies (untuk kedua versi)
+requests>=2.31.0
+urllib3>=2.0.0
+tqdm>=4.66.0
+
+# Async dependencies (hanya untuk download_tiles_async.py)
+aiohttp>=3.9.0
+aiofiles>=23.2.0

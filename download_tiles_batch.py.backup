@@ -1,0 +1,466 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Batch Tile Downloader dengan Resume Capability
+Download tiles dari BPN dalam batches 50x50 dengan progress tracking
+"""
+
+import os
+import sys
+import json
+import time
+import argparse
+import requests
+from pathlib import Path
+from datetime import datetime, timedelta
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import Tuple, List, Dict
+
+# Fix Windows terminal encoding
+if sys.platform == 'win32':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except:
+        pass
+
+# Progress bar
+try:
+    from tqdm import tqdm
+    HAS_TQDM = True
+except ImportError:
+    HAS_TQDM = False
+    print("⚠️  Install tqdm untuk progress bar: pip install tqdm")
+
+# ============= KONFIGURASI =============
+BATCH_SIZE = 50  # 50x50 tiles per batch = 2,500 tiles
+MAX_WORKERS = 10  # Parallel downloads
+RETRY_ATTEMPTS = 3  # Retry per tile
+RETRY_DELAY = 2  # Seconds between retries
+BASE_URL = "https://petadasar.atrbpn.go.id/wms/?d={x}/{y}/{z}/{variant}"
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+    'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+    'Referer': 'https://www.transmigrasi.go.id/'
+}
+
+# Directories
+TILES_DIR = Path("tiles")
+PROGRESS_FILE = TILES_DIR / "progress.json"
+FAILED_FILE = TILES_DIR / "failed_tiles.json"
+
+
+def format_time(seconds):
+    """Format seconds to human readable time"""
+    if seconds < 60:
+        return f"{int(seconds)}s"
+    elif seconds < 3600:
+        return f"{int(seconds/60)}m {int(seconds%60)}s"
+    else:
+        hours = int(seconds / 3600)
+        mins = int((seconds % 3600) / 60)
+        return f"{hours}h {mins}m"
+
+
+def format_size(bytes_size):
+    """Format bytes to human readable size"""
+    for unit in ['B', 'KB', 'MB', 'GB']:
+        if bytes_size < 1024.0:
+            return f"{bytes_size:.2f} {unit}"
+        bytes_size /= 1024.0
+    return f"{bytes_size:.2f} TB"
+
+
+def calculate_batches(x_start, x_end, y_start, y_end, batch_size=BATCH_SIZE):
+    """Calculate all batches needed for the coordinate range"""
+    batches = []
+    batch_num = 1
+
+    x_range = x_end - x_start + 1
+    y_range = y_end - y_start + 1
+
+    # Calculate number of batches in each direction
+    x_batches = (x_range + batch_size - 1) // batch_size
+    y_batches = (y_range + batch_size - 1) // batch_size
+
+    for y_batch_idx in range(y_batches):
+        for x_batch_idx in range(x_batches):
+            batch_x_start = x_start + (x_batch_idx * batch_size)
+            batch_x_end = min(batch_x_start + batch_size - 1, x_end)
+
+            batch_y_start = y_start + (y_batch_idx * batch_size)
+            batch_y_end = min(batch_y_start + batch_size - 1, y_end)
+
+            batch_info = {
+                'batch_num': batch_num,
+                'x_start': batch_x_start,
+                'x_end': batch_x_end,
+                'y_start': batch_y_start,
+                'y_end': batch_y_end,
+                'tiles_count': (batch_x_end - batch_x_start + 1) * (batch_y_end - batch_y_start + 1)
+            }
+            batches.append(batch_info)
+            batch_num += 1
+
+    return batches
+
+
+def load_progress():
+    """Load progress from JSON file"""
+    if PROGRESS_FILE.exists():
+        try:
+            with open(PROGRESS_FILE, 'r') as f:
+                return json.load(f)
+        except:
+            return None
+    return None
+
+
+def save_progress(progress_data):
+    """Save progress to JSON file"""
+    TILES_DIR.mkdir(parents=True, exist_ok=True)
+    progress_data['last_update'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    with open(PROGRESS_FILE, 'w') as f:
+        json.dump(progress_data, f, indent=2)
+
+
+def load_failed_tiles():
+    """Load failed tiles list"""
+    if FAILED_FILE.exists():
+        try:
+            with open(FAILED_FILE, 'r') as f:
+                return json.load(f)
+        except:
+            return {}
+    return {}
+
+
+def save_failed_tiles(failed_data):
+    """Save failed tiles to JSON"""
+    with open(FAILED_FILE, 'w') as f:
+        json.dump(failed_data, f, indent=2)
+
+
+def download_tile(x, y, zoom, variant, output_path, retry=0):
+    """Download single tile with retry logic"""
+    url = BASE_URL.format(x=x, y=y, z=zoom, variant=variant)
+
+    # Skip if already exists
+    if output_path.exists():
+        return {'status': 'skipped', 'x': x, 'y': y, 'path': output_path}
+
+    try:
+        response = requests.get(url, headers=HEADERS, timeout=30)
+
+        if response.status_code == 200:
+            with open(output_path, 'wb') as f:
+                f.write(response.content)
+            return {'status': 'success', 'x': x, 'y': y, 'path': output_path, 'size': len(response.content)}
+        else:
+            error_msg = f"HTTP {response.status_code}"
+            if retry < RETRY_ATTEMPTS:
+                time.sleep(RETRY_DELAY * (retry + 1))
+                return download_tile(x, y, zoom, variant, output_path, retry + 1)
+            return {'status': 'failed', 'x': x, 'y': y, 'error': error_msg, 'retries': retry}
+
+    except Exception as e:
+        error_msg = str(e)
+        if retry < RETRY_ATTEMPTS:
+            time.sleep(RETRY_DELAY * (retry + 1))
+            return download_tile(x, y, zoom, variant, output_path, retry + 1)
+        return {'status': 'failed', 'x': x, 'y': y, 'error': error_msg, 'retries': retry}
+
+
+def download_batch(batch_info, zoom, variant, progress_data, failed_tiles_data):
+    """Download all tiles in a batch"""
+    batch_num = batch_info['batch_num']
+    batch_dir = TILES_DIR / f"tiles_batch_{batch_num:03d}"
+    batch_dir.mkdir(parents=True, exist_ok=True)
+
+    # Generate list of tiles to download
+    tiles_to_download = []
+    for x in range(batch_info['x_start'], batch_info['x_end'] + 1):
+        for y in range(batch_info['y_start'], batch_info['y_end'] + 1):
+            filename = f"tile_{zoom}_{x}_{y}.jpg"
+            output_path = batch_dir / filename
+            tiles_to_download.append((x, y, output_path))
+
+    total_tiles = len(tiles_to_download)
+    success_count = 0
+    failed_count = 0
+    skipped_count = 0
+    total_size = 0
+    failed_list = []
+
+    start_time = time.time()
+
+    # Progress bar
+    if HAS_TQDM:
+        pbar = tqdm(total=total_tiles, desc=f"Batch {batch_num}", unit="tiles")
+
+    # Download with thread pool
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        futures = {
+            executor.submit(download_tile, x, y, zoom, variant, path): (x, y)
+            for x, y, path in tiles_to_download
+        }
+
+        for future in as_completed(futures):
+            result = future.result()
+
+            if result['status'] == 'success':
+                success_count += 1
+                total_size += result.get('size', 0)
+            elif result['status'] == 'skipped':
+                skipped_count += 1
+            elif result['status'] == 'failed':
+                failed_count += 1
+                failed_list.append({
+                    'x': result['x'],
+                    'y': result['y'],
+                    'error': result['error'],
+                    'retries': result['retries']
+                })
+
+            if HAS_TQDM:
+                pbar.update(1)
+                pbar.set_postfix({
+                    'OK': success_count,
+                    'Skip': skipped_count,
+                    'Fail': failed_count
+                })
+
+    if HAS_TQDM:
+        pbar.close()
+
+    elapsed_time = time.time() - start_time
+
+    # Save failed tiles for this batch
+    if failed_list:
+        batch_key = f"batch_{batch_num:03d}"
+        failed_tiles_data[batch_key] = failed_list
+        save_failed_tiles(failed_tiles_data)
+
+    # Update progress
+    batch_stats = {
+        'status': 'completed',
+        'tiles': total_tiles,
+        'success': success_count,
+        'skipped': skipped_count,
+        'failed': failed_count,
+        'time_seconds': elapsed_time,
+        'size_bytes': total_size
+    }
+
+    progress_data['batch_details'][str(batch_num)] = batch_stats
+    progress_data['completed_batches'].append(batch_num)
+    progress_data['tiles_downloaded'] += success_count
+    progress_data['tiles_failed'] += failed_count
+
+    # Calculate ETA
+    completed_batches = len(progress_data['completed_batches'])
+    total_batches = progress_data['total_batches']
+    avg_time_per_batch = (time.time() - datetime.fromisoformat(progress_data['start_time']).timestamp()) / completed_batches
+    remaining_batches = total_batches - completed_batches
+    eta_seconds = remaining_batches * avg_time_per_batch
+    progress_data['estimated_completion'] = (datetime.now() + timedelta(seconds=eta_seconds)).strftime("%Y-%m-%d %H:%M:%S")
+    progress_data['avg_time_per_batch'] = avg_time_per_batch
+
+    save_progress(progress_data)
+
+    # Print summary
+    print(f"\n✅ Batch {batch_num}/{total_batches} selesai!")
+    print(f"   Sukses: {success_count} | Skipped: {skipped_count} | Gagal: {failed_count}")
+    print(f"   Waktu: {format_time(elapsed_time)} | Size: {format_size(total_size)}")
+    print(f"   Progress: {completed_batches}/{total_batches} batches ({completed_batches*100//total_batches}%)")
+    print(f"   ETA: {format_time(eta_seconds)} (selesai ~{progress_data['estimated_completion'].split()[1]})")
+    print()
+
+    return batch_stats
+
+
+def show_status():
+    """Display current download status"""
+    progress = load_progress()
+
+    if not progress:
+        print("❌ Tidak ada progress yang tersimpan")
+        return
+
+    print("\n" + "=" * 60)
+    print("📊 STATUS DOWNLOAD")
+    print("=" * 60)
+    print(f"Total Tiles: {progress['total_tiles']:,}")
+    print(f"Total Batches: {progress['total_batches']}")
+    print(f"Batch Size: {progress['config']['batch_size']}x{progress['config']['batch_size']}")
+    print()
+    print(f"Completed Batches: {len(progress['completed_batches'])}/{progress['total_batches']}")
+    print(f"Tiles Downloaded: {progress['tiles_downloaded']:,}")
+    print(f"Tiles Failed: {progress['tiles_failed']:,}")
+    print()
+    print(f"Start Time: {progress['start_time']}")
+    print(f"Last Update: {progress['last_update']}")
+
+    if 'estimated_completion' in progress:
+        print(f"Estimated Completion: {progress['estimated_completion']}")
+
+    print("\n" + "=" * 60)
+
+    # Show batch details
+    if progress['batch_details']:
+        print("\nRecent Batches:")
+        recent_batches = sorted(progress['batch_details'].keys(), key=int, reverse=True)[:5]
+        for batch_key in recent_batches:
+            batch = progress['batch_details'][batch_key]
+            print(f"  Batch {batch_key}: {batch['success']}/{batch['tiles']} tiles "
+                  f"({format_time(batch['time_seconds'])})")
+
+
+def main():
+    parser = argparse.ArgumentParser(description='BPN Tile Batch Downloader')
+    parser.add_argument('--resume', action='store_true', help='Resume dari progress terakhir')
+    parser.add_argument('--retry-failed', action='store_true', help='Retry semua failed tiles')
+    parser.add_argument('--batch', type=int, help='Download batch tertentu')
+    parser.add_argument('--status', action='store_true', help='Tampilkan status tanpa download')
+
+    args = parser.parse_args()
+
+    # Show status
+    if args.status:
+        show_status()
+        return
+
+    print("=" * 60)
+    print("   BPN Batch Tile Downloader")
+    print("=" * 60)
+    print()
+
+    # Check for resume
+    progress = load_progress()
+    failed_tiles = load_failed_tiles()
+
+    if args.resume and progress:
+        print("📂 Melanjutkan download dari progress terakhir...")
+        config = progress['config']
+        x_start = config['x_start']
+        x_end = config['x_end']
+        y_start = config['y_start']
+        y_end = config['y_end']
+        zoom = config['zoom']
+        variant = config['variant']
+
+        print(f"   Range: X[{x_start}-{x_end}], Y[{y_start}-{y_end}], Zoom {zoom}")
+        print(f"   Completed: {len(progress['completed_batches'])}/{progress['total_batches']} batches")
+        print()
+
+    else:
+        # Get user input
+        print("📌 Input koordinat tiles:")
+        print()
+
+        x_start = int(input("X Start: "))
+        x_end = int(input("X End: "))
+        y_start = int(input("Y Start: "))
+        y_end = int(input("Y End: "))
+        zoom = int(input("Zoom Level: "))
+        variant = int(input("Variant (default 2): ") or "2")
+
+        # Calculate batches
+        batches = calculate_batches(x_start, x_end, y_start, y_end)
+        total_tiles = (x_end - x_start + 1) * (y_end - y_start + 1)
+
+        print("\n" + "=" * 60)
+        print("📋 Ringkasan:")
+        print("=" * 60)
+        print(f"  X Range: {x_start} - {x_end} ({x_end - x_start + 1} tiles)")
+        print(f"  Y Range: {y_start} - {y_end} ({y_end - y_start + 1} tiles)")
+        print(f"  Zoom: {zoom} | Variant: {variant}")
+        print(f"  Total tiles: {total_tiles:,}")
+        print(f"  Batch size: {BATCH_SIZE}x{BATCH_SIZE} = {BATCH_SIZE*BATCH_SIZE:,} tiles/batch")
+        print(f"  Total batches: {len(batches)}")
+        print("=" * 60)
+
+        confirm = input("\n✅ Lanjutkan download? (y/n): ").strip().lower()
+        if confirm not in ['y', 'yes']:
+            print("❌ Download dibatalkan")
+            return
+
+        print()
+
+        # Initialize progress
+        progress = {
+            'total_tiles': total_tiles,
+            'total_batches': len(batches),
+            'completed_batches': [],
+            'current_batch': None,
+            'tiles_downloaded': 0,
+            'tiles_failed': 0,
+            'start_time': datetime.now().isoformat(),
+            'last_update': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'config': {
+                'x_start': x_start,
+                'x_end': x_end,
+                'y_start': y_start,
+                'y_end': y_end,
+                'zoom': zoom,
+                'variant': variant,
+                'batch_size': BATCH_SIZE
+            },
+            'batch_details': {}
+        }
+        save_progress(progress)
+
+    # Calculate batches
+    config = progress['config']
+    batches = calculate_batches(
+        config['x_start'],
+        config['x_end'],
+        config['y_start'],
+        config['y_end']
+    )
+
+    # Download specific batch
+    if args.batch:
+        batch_to_download = next((b for b in batches if b['batch_num'] == args.batch), None)
+        if batch_to_download:
+            print(f"📥 Downloading batch {args.batch}...")
+            download_batch(batch_to_download, config['zoom'], config['variant'], progress, failed_tiles)
+        else:
+            print(f"❌ Batch {args.batch} tidak ditemukan")
+        return
+
+    # Download all batches
+    try:
+        for batch in batches:
+            # Skip completed batches
+            if batch['batch_num'] in progress['completed_batches']:
+                continue
+
+            progress['current_batch'] = batch['batch_num']
+            save_progress(progress)
+
+            download_batch(batch, config['zoom'], config['variant'], progress, failed_tiles)
+
+        # Final summary
+        print("\n" + "=" * 60)
+        print("✅ SEMUA BATCH SELESAI!")
+        print("=" * 60)
+        print(f"Total batches: {len(progress['completed_batches'])}/{progress['total_batches']}")
+        print(f"Total tiles downloaded: {progress['tiles_downloaded']:,}")
+        print(f"Total tiles failed: {progress['tiles_failed']:,}")
+        print()
+        print(f"📁 Tiles disimpan di: {TILES_DIR.absolute()}/")
+        if progress['tiles_failed'] > 0:
+            print(f"⚠️  Failed tiles list: {FAILED_FILE}")
+            print(f"   Retry dengan: python {__file__} --retry-failed")
+        print()
+
+    except KeyboardInterrupt:
+        print("\n\n⏸️  Download di-pause")
+        print(f"   Progress tersimpan di: {PROGRESS_FILE}")
+        print(f"   Resume dengan: python {__file__} --resume")
+        print()
+
+
+if __name__ == "__main__":
+    main()

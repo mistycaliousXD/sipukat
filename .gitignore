@@ -1,0 +1,19 @@
+# Ignore large data files and assets
+*.ecw
+*.tif
+*.tiff
+*.png
+*.jpg
+*.jpeg
+*.vrt
+
+# Ignore auxiliary files
+*.ecw.aux.xml
+
+# Ignore directories with generated or large data
+ECW/
+merged/
+tiles/
+georeferenced/
+__pycache__/
+.history/
