@@ -17,3 +17,11 @@ tiles/
 georeferenced/
 __pycache__/
 .history/
+
+# Ignore Windows reserved device names
+nul
+con
+prn
+aux
+com*
+lpt*

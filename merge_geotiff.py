@@ -227,10 +227,18 @@ def parse_tile_info(tile_file):
     return tile_file, None, None, None
 
 
-def create_vrt(batches, output_vrt: Path, verbose=True):
-    """Create VRT from all batches with parallel metadata extraction"""
+def create_vrt(batches, output_vrt: Path, verbose=True, resampling='cubic'):
+    """Create VRT from all batches with parallel metadata extraction
+
+    Args:
+        batches: List of batch info dicts
+        output_vrt: Output VRT file path
+        verbose: Show progress messages
+        resampling: Resampling algorithm - 'nearest', 'bilinear', 'cubic', 'lanczos' (default: cubic)
+    """
     if verbose:
         print(f"🔨 Membuat VRT dari {len(batches)} batches...")
+        print(f"   Resampling: {resampling}")
 
     # Collect all tiles from all batches first
     all_tile_files = []
@@ -305,7 +313,8 @@ def create_vrt(batches, output_vrt: Path, verbose=True):
 
     vrt_cmd = [
         gdalbuildvrt_cmd,
-        '-resolution', 'highest',  # Fastest - no metadata averaging needed
+        '-resolution', 'highest',  # Use highest resolution from input tiles
+        '-r', resampling,  # Resampling algorithm for better quality
         '-te', str(min_lon), str(min_lat), str(max_lon), str(max_lat),
         '-a_srs', 'EPSG:4326',
         '-input_file_list', str(tile_list_file),
@@ -343,7 +352,7 @@ def create_vrt(batches, output_vrt: Path, verbose=True):
         return False
 
 
-def merge_to_geotiff(vrt_file: Path, output_tif: Path, verbose=True, compress=False):
+def merge_to_geotiff(vrt_file: Path, output_tif: Path, verbose=True, compress=False, resampling='cubic'):
     """Convert VRT ke GeoTIFF
 
     Args:
@@ -351,6 +360,7 @@ def merge_to_geotiff(vrt_file: Path, output_tif: Path, verbose=True, compress=Fa
         output_tif: Output GeoTIFF file
         verbose: Show progress
         compress: Use LZW compression (slower but smaller file, keeps CPU busy)
+        resampling: Resampling algorithm - 'nearest', 'bilinear', 'cubic', 'lanczos' (default: cubic)
     """
     if not vrt_file.exists():
         if verbose:
@@ -360,6 +370,7 @@ def merge_to_geotiff(vrt_file: Path, output_tif: Path, verbose=True, compress=Fa
     if verbose:
         print(f"🔨 Merging ke GeoTIFF...")
         print(f"   Output: {output_tif}")
+        print(f"   Resampling: {resampling}")
         if compress:
             print(f"   Compression: LZW (slower but smaller, max CPU usage)")
         else:
@@ -379,9 +390,11 @@ def merge_to_geotiff(vrt_file: Path, output_tif: Path, verbose=True, compress=Fa
     # NUM_THREADS=ALL_CPUS: Use all CPU cores
     # BLOCKXSIZE/BLOCKYSIZE: Optimized for tile processing
     # BIGTIFF=YES: Always use BigTIFF for multi-batch processing
+    # -r: Resampling algorithm for better quality
     translate_cmd = [
         gdal_translate_cmd,
         '-of', 'GTiff',
+        '-r', resampling,                # Resampling algorithm
         '-co', 'COMPRESS=LZW' if compress else 'COMPRESS=NONE',
         '-co', 'TILED=YES',              # Tiled output for better performance
         '-co', 'BLOCKXSIZE=512',         # Optimized block size
@@ -450,6 +463,7 @@ def process_single_batch(batch_info):
     batch_num = batch['batch_num']
     output_dir = batch_info['output_dir']
     compress = batch_info.get('compress', False)
+    resampling = batch_info.get('resampling', 'cubic')
 
     try:
         # Create VRT untuk single batch
@@ -457,11 +471,11 @@ def process_single_batch(batch_info):
         output_tif = output_dir / f"merged_batch_{batch_num:03d}.tif"
 
         # Create VRT (silent mode)
-        if not create_vrt([batch], vrt_file, verbose=False):
+        if not create_vrt([batch], vrt_file, verbose=False, resampling=resampling):
             return (False, batch_num, None, "Failed to create VRT")
 
         # Merge to GeoTIFF (silent mode)
-        if not merge_to_geotiff(vrt_file, output_tif, verbose=False, compress=compress):
+        if not merge_to_geotiff(vrt_file, output_tif, verbose=False, compress=compress, resampling=resampling):
             return (False, batch_num, None, "Failed to merge to GeoTIFF")
 
         # Clean up VRT and tile list
@@ -478,11 +492,12 @@ def process_single_batch(batch_info):
         return (False, batch_num, None, str(e))
 
 
-def process_batches_parallel(batches, output_dir, max_workers=None, compress=False):
+def process_batches_parallel(batches, output_dir, max_workers=None, compress=False, resampling='cubic'):
     """
     Process multiple batches in parallel
     max_workers: Number of parallel processes (default: CPU count for I/O-bound tasks)
     compress: Use LZW compression
+    resampling: Resampling algorithm
     """
     if max_workers is None:
         # Use all CPU cores for I/O-bound tasks (merge is I/O heavy)
@@ -493,7 +508,7 @@ def process_batches_parallel(batches, output_dir, max_workers=None, compress=Fal
 
     # Prepare batch info
     batch_infos = [
-        {'batch': batch, 'output_dir': output_dir, 'compress': compress}
+        {'batch': batch, 'output_dir': output_dir, 'compress': compress, 'resampling': resampling}
         for batch in batches
     ]
 
@@ -541,7 +556,7 @@ def process_batches_parallel(batches, output_dir, max_workers=None, compress=Fal
     return results
 
 
-def merge_single_batch(batch_num, georef_dir, merged_dir, compress=False):
+def merge_single_batch(batch_num, georef_dir, merged_dir, compress=False, resampling='cubic'):
     """Merge a single batch to individual GeoTIFF file
 
     Args:
@@ -549,6 +564,7 @@ def merge_single_batch(batch_num, georef_dir, merged_dir, compress=False):
         georef_dir: Georeferenced directory path
         merged_dir: Merged output directory path
         compress: Use LZW compression
+        resampling: Resampling algorithm
 
     Returns:
         tuple: (success: bool, output_file: Path, error_message: str)
@@ -567,11 +583,11 @@ def merge_single_batch(batch_num, georef_dir, merged_dir, compress=False):
         # Create VRT for this batch
         vrt_file = merged_dir / f"batch_{batch_num:03d}.vrt"
 
-        if not create_vrt([batch_info], vrt_file, verbose=False):
+        if not create_vrt([batch_info], vrt_file, verbose=False, resampling=resampling):
             return (False, None, "VRT creation failed")
 
         # Merge to GeoTIFF
-        if not merge_to_geotiff(vrt_file, output_file, verbose=False, compress=compress):
+        if not merge_to_geotiff(vrt_file, output_file, verbose=False, compress=compress, resampling=resampling):
             return (False, None, "GeoTIFF conversion failed")
 
         # Clean up VRT and tile list
@@ -626,7 +642,7 @@ def signal_handler(sig, frame):
     SHUTDOWN_REQUESTED = True
 
 
-def watch_and_merge(batch_list, georef_dir, merged_dir, check_interval=30, compress=False, parallel=False, max_workers=None):
+def watch_and_merge(batch_list, georef_dir, merged_dir, check_interval=30, compress=False, parallel=False, max_workers=None, resampling='cubic'):
     """Watch for georeferenced batches and merge automatically
 
     Args:
@@ -637,6 +653,7 @@ def watch_and_merge(batch_list, georef_dir, merged_dir, check_interval=30, compr
         compress: Use LZW compression
         parallel: Merge multiple batches in parallel (default: False)
         max_workers: Max parallel workers (default: CPU count)
+        resampling: Resampling algorithm (default: cubic)
 
     Returns:
         dict: Summary of merging results
@@ -706,7 +723,7 @@ def watch_and_merge(batch_list, georef_dir, merged_dir, check_interval=30, compr
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 # Submit all merge tasks
                 future_to_batch = {
-                    executor.submit(merge_single_batch, batch_num, georef_dir, merged_dir, compress): batch_num
+                    executor.submit(merge_single_batch, batch_num, georef_dir, merged_dir, compress, resampling): batch_num
                     for batch_num in ready_batches
                     if not SHUTDOWN_REQUESTED
                 }
@@ -737,7 +754,7 @@ def watch_and_merge(batch_list, georef_dir, merged_dir, check_interval=30, compr
                 if SHUTDOWN_REQUESTED:
                     break
 
-                success, output_file, message = merge_single_batch(batch_num, georef_dir, merged_dir, compress=compress)
+                success, output_file, message = merge_single_batch(batch_num, georef_dir, merged_dir, compress=compress, resampling=resampling)
                 if success:
                     print(f"✅ Merged batch {batch_num:03d} → {output_file.name} ({message})")
                     progress['merged'].append(batch_num)
@@ -778,7 +795,7 @@ def watch_and_merge(batch_list, georef_dir, merged_dir, check_interval=30, compr
 
                     with ThreadPoolExecutor(max_workers=max_workers) as executor:
                         future_to_batch = {
-                            executor.submit(merge_single_batch, batch_num, georef_dir, merged_dir, compress): batch_num
+                            executor.submit(merge_single_batch, batch_num, georef_dir, merged_dir, compress, resampling): batch_num
                             for batch_num in newly_ready
                             if not SHUTDOWN_REQUESTED
                         }
@@ -816,7 +833,7 @@ def watch_and_merge(batch_list, georef_dir, merged_dir, check_interval=30, compr
                         print(f"✅ New batch ready: {batch_num:03d}")
                         print(f"🔨 Merging batch {batch_num:03d}...")
 
-                        success, output_file, message = merge_single_batch(batch_num, georef_dir, merged_dir, compress=compress)
+                        success, output_file, message = merge_single_batch(batch_num, georef_dir, merged_dir, compress=compress, resampling=resampling)
                         if success:
                             print(f"✅ Merged batch {batch_num:03d} → {output_file.name} ({message})")
                             progress['merged'].append(batch_num)
@@ -885,6 +902,7 @@ def main():
     parser.add_argument('--workers', type=int, default=None, help='Number of parallel workers (default: CPU count)')
     parser.add_argument('--single-file', action='store_true', help='Merge all batches into single GeoTIFF (slower but one file)')
     parser.add_argument('--compress', action='store_true', help='Use LZW compression (slower but smaller file, maximizes CPU usage)')
+    parser.add_argument('--resampling', type=str, default='cubic', choices=['nearest', 'bilinear', 'cubic', 'lanczos'], help='Resampling algorithm (default: cubic for best quality)')
     parser.add_argument('--watch', action='store_true', help='Watch mode: auto-merge batches as they become ready')
     parser.add_argument('--check-interval', type=int, default=30, help='Watch mode: seconds between checks (default: 30)')
     parser.add_argument('--resume', action='store_true', help='Resume previous watch mode session')
@@ -1014,7 +1032,8 @@ def main():
                         check_interval=args.check_interval,
                         compress=args.compress,
                         parallel=args.parallel,
-                        max_workers=args.workers)
+                        max_workers=args.workers,
+                        resampling=args.resampling)
         return
 
     # NORMAL MODE: Continue with existing logic
@@ -1085,7 +1104,7 @@ def main():
 
     # PARALLEL MODE: Process batches in parallel
     if args.parallel and len(batches) > 1:
-        results = process_batches_parallel(batches, merged_dir, args.workers, args.compress)
+        results = process_batches_parallel(batches, merged_dir, args.workers, args.compress, args.resampling)
 
         # Summary
         successful = [r for r in results if r['success']]
@@ -1111,7 +1130,7 @@ def main():
     else:
         # Create VRT
         vrt_file = merged_dir / "mosaic.vrt"
-        if not create_vrt(batches, vrt_file):
+        if not create_vrt(batches, vrt_file, resampling=args.resampling):
             return
 
         # Generate unique output filename
@@ -1121,7 +1140,7 @@ def main():
         print(f"📁 Output file: {output_geotiff.name}\n")
 
         # Merge to GeoTIFF with optional compression
-        if merge_to_geotiff(vrt_file, output_geotiff, compress=args.compress):
+        if merge_to_geotiff(vrt_file, output_geotiff, compress=args.compress, resampling=args.resampling):
             # Write log
             log_file = merged_dir / f"merge_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
             write_merge_log(batches, output_geotiff, log_file)

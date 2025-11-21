@@ -4,13 +4,14 @@
   "completed_batches": [
     1,
     2,
-    3
+    3,
+    4
   ],
-  "current_batch": 4,
-  "tiles_downloaded": 6291,
+  "current_batch": 5,
+  "tiles_downloaded": 8589,
   "tiles_failed": 0,
   "start_time": "2025-11-22T00:32:27.099539",
-  "last_update": "2025-11-22 00:34:38",
+  "last_update": "2025-11-22 00:35:15",
   "config": {
     "x_start": 1722530,
     "x_end": 1722655,
@@ -49,8 +50,17 @@
       "failed": 0,
       "time_seconds": 31.903419494628906,
       "size_bytes": 62642748
+    },
+    "4": {
+      "status": "completed",
+      "tiles": 2300,
+      "success": 2298,
+      "skipped": 2,
+      "failed": 0,
+      "time_seconds": 36.581456899642944,
+      "size_bytes": 94951616
     }
   },
-  "estimated_completion": "2025-11-22 00:36:50",
-  "avg_time_per_batch": 43.81994318962097
+  "estimated_completion": "2025-11-22 00:36:39",
+  "avg_time_per_batch": 42.012094378471375
 }
