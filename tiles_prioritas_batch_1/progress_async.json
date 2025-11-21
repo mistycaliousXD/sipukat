@@ -1,0 +1,126 @@
+{
+  "total_tiles": 14848,
+  "total_batches": 10,
+  "completed_batches": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "current_batch": 10,
+  "tiles_downloaded": 14730,
+  "tiles_failed": 0,
+  "start_time": "2025-11-11T22:42:26.453201",
+  "last_update": "2025-11-11 22:48:15",
+  "config": {
+    "x_start": 1729150,
+    "x_end": 1729381,
+    "y_start": 1051521,
+    "y_end": 1051584,
+    "zoom": 21,
+    "variant": 2,
+    "batch_size": 50,
+    "max_concurrent": 500,
+    "tiles_folder": "tiles_prioritas_batch_1"
+  },
+  "batch_details": {
+    "1": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2500,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 27.91894507408142,
+      "size_bytes": 37479969
+    },
+    "2": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2500,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 26.175336599349976,
+      "size_bytes": 39787062
+    },
+    "3": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2500,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 26.470955848693848,
+      "size_bytes": 41796813
+    },
+    "4": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2436,
+      "skipped": 64,
+      "failed": 0,
+      "time_seconds": 77.2272675037384,
+      "size_bytes": 43854906
+    },
+    "5": {
+      "status": "completed",
+      "tiles": 1600,
+      "success": 1555,
+      "skipped": 45,
+      "failed": 0,
+      "time_seconds": 67.53325200080872,
+      "size_bytes": 27596873
+    },
+    "6": {
+      "status": "completed",
+      "tiles": 700,
+      "success": 700,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 24.953775882720947,
+      "size_bytes": 8253013
+    },
+    "7": {
+      "status": "completed",
+      "tiles": 700,
+      "success": 694,
+      "skipped": 6,
+      "failed": 0,
+      "time_seconds": 30.996278524398804,
+      "size_bytes": 12107671
+    },
+    "8": {
+      "status": "completed",
+      "tiles": 700,
+      "success": 697,
+      "skipped": 3,
+      "failed": 0,
+      "time_seconds": 31.209935903549194,
+      "size_bytes": 12149491
+    },
+    "9": {
+      "status": "completed",
+      "tiles": 700,
+      "success": 700,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 20.06799006462097,
+      "size_bytes": 13149020
+    },
+    "10": {
+      "status": "completed",
+      "tiles": 448,
+      "success": 448,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 16.073871850967407,
+      "size_bytes": 7488739
+    }
+  },
+  "estimated_completion": "2025-11-11 22:48:15",
+  "avg_time_per_batch": 34.87082827091217
+}

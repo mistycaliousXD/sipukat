@@ -49,10 +49,8 @@ HEADERS = {
     'Referer': 'https://www.transmigrasi.go.id/'
 }
 
-# Directories
-TILES_DIR = Path("tiles")
-PROGRESS_FILE = TILES_DIR / "progress_async.json"
-FAILED_FILE = TILES_DIR / "failed_tiles_async.json"
+# Default directory (will be overridden by user input)
+DEFAULT_TILES_DIR = "tiles"
 
 
 def format_time(seconds):
@@ -109,20 +107,21 @@ def calculate_batches(x_start, x_end, y_start, y_end, batch_size=BATCH_SIZE):
     return batches
 
 
-def load_progress():
+def load_progress(tiles_dir):
     """Load progress from JSON"""
-    if PROGRESS_FILE.exists():
+    progress_file = tiles_dir / "progress_async.json"
+    if progress_file.exists():
         try:
-            with open(PROGRESS_FILE, 'r') as f:
+            with open(progress_file, 'r') as f:
                 return json.load(f)
         except:
             return None
     return None
 
 
-def save_progress(progress_data):
+def save_progress(progress_data, tiles_dir):
     """Save progress with optimized batch details"""
-    TILES_DIR.mkdir(parents=True, exist_ok=True)
+    tiles_dir.mkdir(parents=True, exist_ok=True)
     progress_data['last_update'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # Keep only recent batch details
@@ -133,24 +132,27 @@ def save_progress(progress_data):
             k: progress_data['batch_details'][k] for k in recent_keys
         }
 
-    with open(PROGRESS_FILE, 'w') as f:
+    progress_file = tiles_dir / "progress_async.json"
+    with open(progress_file, 'w') as f:
         json.dump(progress_data, f, indent=2)
 
 
-def load_failed_tiles():
+def load_failed_tiles(tiles_dir):
     """Load failed tiles"""
-    if FAILED_FILE.exists():
+    failed_file = tiles_dir / "failed_tiles_async.json"
+    if failed_file.exists():
         try:
-            with open(FAILED_FILE, 'r') as f:
+            with open(failed_file, 'r') as f:
                 return json.load(f)
         except:
             return {}
     return {}
 
 
-def save_failed_tiles(failed_data):
+def save_failed_tiles(failed_data, tiles_dir):
     """Save failed tiles"""
-    with open(FAILED_FILE, 'w') as f:
+    failed_file = tiles_dir / "failed_tiles_async.json"
+    with open(failed_file, 'w') as f:
         json.dump(failed_data, f, indent=2)
 
 
@@ -197,10 +199,10 @@ async def download_tile(session, semaphore, x, y, zoom, variant, output_path, re
             return {'status': 'failed', 'x': x, 'y': y, 'error': error_msg, 'retries': retry}
 
 
-async def download_batch(batch_info, zoom, variant, progress_data, failed_tiles_data, max_concurrent=MAX_CONCURRENT):
+async def download_batch(batch_info, zoom, variant, progress_data, failed_tiles_data, tiles_dir, max_concurrent=MAX_CONCURRENT):
     """Async download all tiles in a batch"""
     batch_num = batch_info['batch_num']
-    batch_dir = TILES_DIR / f"tiles_batch_{batch_num:03d}"
+    batch_dir = tiles_dir / f"tiles_batch_{batch_num:03d}"
     batch_dir.mkdir(parents=True, exist_ok=True)
 
     # Generate tiles list
@@ -285,15 +287,7 @@ async def download_batch(batch_info, zoom, variant, progress_data, failed_tiles_
                     })
 
         except KeyboardInterrupt:
-            # Cancel all pending tasks
-            for task in tasks:
-                if not task.done():
-                    task.cancel()
-
-            # Wait for cancellation to complete
-            await asyncio.gather(*tasks, return_exceptions=True)
-
-            # Re-raise to propagate to main
+            # Re-raise to propagate to main (tasks already cancelled by gather)
             raise
 
         finally:
@@ -301,18 +295,13 @@ async def download_batch(batch_info, zoom, variant, progress_data, failed_tiles_
             if HAS_TQDM and pbar:
                 pbar.close()
 
-            # Ensure all tasks are cleaned up
-            for task in tasks:
-                if not task.done():
-                    task.cancel()
-
     elapsed_time = time.time() - start_time
 
     # Save failed tiles
     if failed_list:
         batch_key = f"batch_{batch_num:03d}"
         failed_tiles_data[batch_key] = failed_list
-        save_failed_tiles(failed_tiles_data)
+        save_failed_tiles(failed_tiles_data, tiles_dir)
 
     # Update progress
     batch_stats = {
@@ -339,7 +328,7 @@ async def download_batch(batch_info, zoom, variant, progress_data, failed_tiles_
     progress_data['estimated_completion'] = (datetime.now() + timedelta(seconds=eta_seconds)).strftime("%Y-%m-%d %H:%M:%S")
     progress_data['avg_time_per_batch'] = avg_time_per_batch
 
-    save_progress(progress_data)
+    save_progress(progress_data, tiles_dir)
 
     # Print summary
     print(f"\n✅ Batch {batch_num}/{total_batches} selesai!")
@@ -348,12 +337,13 @@ async def download_batch(batch_info, zoom, variant, progress_data, failed_tiles_
     print(f"   Speed: {total_tiles/elapsed_time:.1f} tiles/s")
     print(f"   Progress: {completed_batches}/{total_batches} batches ({completed_batches*100//total_batches}%)")
     print(f"   ETA: {format_time(eta_seconds)} (selesai ~{progress_data['estimated_completion'].split()[1]})")
+    print(f"   📁 Folder: {tiles_dir.absolute()}/")
     print()
 
     return batch_stats
 
 
-async def main_async(progress, failed_tiles, config, batches, args, concurrent_limit):
+async def main_async(progress, failed_tiles, config, batches, args, tiles_dir, concurrent_limit):
     """Main async download loop with proper task cleanup"""
     try:
         for batch in batches:
@@ -362,9 +352,9 @@ async def main_async(progress, failed_tiles, config, batches, args, concurrent_l
                 continue
 
             progress['current_batch'] = batch['batch_num']
-            save_progress(progress)
+            save_progress(progress, tiles_dir)
 
-            await download_batch(batch, config['zoom'], config['variant'], progress, failed_tiles, concurrent_limit)
+            await download_batch(batch, config['zoom'], config['variant'], progress, failed_tiles, tiles_dir, concurrent_limit)
 
         # Final summary
         print("\n" + "=" * 60)
@@ -374,9 +364,10 @@ async def main_async(progress, failed_tiles, config, batches, args, concurrent_l
         print(f"Total tiles downloaded: {progress['tiles_downloaded']:,}")
         print(f"Total tiles failed: {progress['tiles_failed']:,}")
         print()
-        print(f"📁 Tiles disimpan di: {TILES_DIR.absolute()}/")
+        print(f"📁 Tiles disimpan di: {tiles_dir.absolute()}/")
         if progress['tiles_failed'] > 0:
-            print(f"⚠️  Failed tiles list: {FAILED_FILE}")
+            failed_file = tiles_dir / "failed_tiles_async.json"
+            print(f"⚠️  Failed tiles list: {failed_file}")
         print()
 
     except KeyboardInterrupt:
@@ -395,7 +386,8 @@ async def main_async(progress, failed_tiles, config, batches, args, concurrent_l
             # Wait for all cancellations to complete
             await asyncio.gather(*pending_tasks, return_exceptions=True)
 
-        print(f"   Progress tersimpan di: {PROGRESS_FILE}")
+        progress_file = tiles_dir / "progress_async.json"
+        print(f"   Progress tersimpan di: {progress_file}")
         print()
 
     except Exception as e:
@@ -419,6 +411,7 @@ def main():
     parser = argparse.ArgumentParser(description='BPN Async Tile Downloader (High Performance)')
     parser.add_argument('--resume', action='store_true', help='Resume dari progress terakhir')
     parser.add_argument('--concurrent', type=int, default=MAX_CONCURRENT, help=f'Max concurrent downloads (default: {MAX_CONCURRENT})')
+    parser.add_argument('--folder', type=str, help='Custom folder name untuk menyimpan tiles')
 
     args = parser.parse_args()
 
@@ -427,9 +420,21 @@ def main():
     print("=" * 60)
     print()
 
+    # Determine tiles directory
+    if args.folder:
+        tiles_dir = Path(args.folder)
+    elif args.resume:
+        # Try to load from default location first
+        tiles_dir = Path(DEFAULT_TILES_DIR)
+        temp_progress = load_progress(tiles_dir)
+        if temp_progress and 'tiles_folder' in temp_progress['config']:
+            tiles_dir = Path(temp_progress['config']['tiles_folder'])
+    else:
+        tiles_dir = Path(DEFAULT_TILES_DIR)
+
     # Check for resume
-    progress = load_progress()
-    failed_tiles = load_failed_tiles()
+    progress = load_progress(tiles_dir)
+    failed_tiles = load_failed_tiles(tiles_dir)
 
     if args.resume and progress:
         print("📂 Melanjutkan download dari progress terakhir...")
@@ -441,8 +446,13 @@ def main():
         zoom = config['zoom']
         variant = config['variant']
 
+        # Get tiles_dir from config if available
+        if 'tiles_folder' in config:
+            tiles_dir = Path(config['tiles_folder'])
+
         print(f"   Range: X[{x_start}-{x_end}], Y[{y_start}-{y_end}], Zoom {zoom}")
         print(f"   Completed: {len(progress['completed_batches'])}/{progress['total_batches']} batches")
+        print(f"   📁 Folder: {tiles_dir.absolute()}/")
         print()
 
     else:
@@ -456,6 +466,15 @@ def main():
         y_end = int(input("Y End: "))
         zoom = int(input("Zoom Level: "))
         variant = int(input("Variant (default 2): ") or "2")
+
+        # Ask for custom folder name if not provided via args
+        if not args.folder:
+            print()
+            folder_input = input(f"📁 Nama folder untuk tiles (default '{DEFAULT_TILES_DIR}'): ").strip()
+            if folder_input:
+                tiles_dir = Path(folder_input)
+            else:
+                tiles_dir = Path(DEFAULT_TILES_DIR)
 
         # Calculate batches
         batches = calculate_batches(x_start, x_end, y_start, y_end)
@@ -471,6 +490,7 @@ def main():
         print(f"  Batch size: {BATCH_SIZE}x{BATCH_SIZE} = {BATCH_SIZE*BATCH_SIZE:,} tiles/batch")
         print(f"  Total batches: {len(batches)}")
         print(f"  Max concurrent: {args.concurrent}")
+        print(f"  📁 Folder: {tiles_dir.absolute()}/")
         print("=" * 60)
 
         confirm = input("\n✅ Lanjutkan download? (y/n): ").strip().lower()
@@ -498,11 +518,12 @@ def main():
                 'zoom': zoom,
                 'variant': variant,
                 'batch_size': BATCH_SIZE,
-                'max_concurrent': args.concurrent
+                'max_concurrent': args.concurrent,
+                'tiles_folder': str(tiles_dir)
             },
             'batch_details': {}
         }
-        save_progress(progress)
+        save_progress(progress, tiles_dir)
 
     # Calculate batches
     config = progress['config']
@@ -524,7 +545,7 @@ def main():
         # Windows requires specific event loop policy
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-    asyncio.run(main_async(progress, failed_tiles, config, batches, args, concurrent_limit))
+    asyncio.run(main_async(progress, failed_tiles, config, batches, args, tiles_dir, concurrent_limit))
 
 
 if __name__ == "__main__":

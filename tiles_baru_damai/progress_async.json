@@ -1,0 +1,56 @@
+{
+  "total_tiles": 12096,
+  "total_batches": 6,
+  "completed_batches": [
+    1,
+    2,
+    3
+  ],
+  "current_batch": 4,
+  "tiles_downloaded": 6291,
+  "tiles_failed": 0,
+  "start_time": "2025-11-22T00:32:27.099539",
+  "last_update": "2025-11-22 00:34:38",
+  "config": {
+    "x_start": 1722530,
+    "x_end": 1722655,
+    "y_start": 1051169,
+    "y_end": 1051264,
+    "zoom": 21,
+    "variant": 2,
+    "batch_size": 50,
+    "max_concurrent": 500,
+    "tiles_folder": "tiles_baru_damai"
+  },
+  "batch_details": {
+    "1": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2497,
+      "skipped": 3,
+      "failed": 0,
+      "time_seconds": 36.94522023200989,
+      "size_bytes": 104929978
+    },
+    "2": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2496,
+      "skipped": 4,
+      "failed": 0,
+      "time_seconds": 61.481621503829956,
+      "size_bytes": 115003949
+    },
+    "3": {
+      "status": "completed",
+      "tiles": 1300,
+      "success": 1298,
+      "skipped": 2,
+      "failed": 0,
+      "time_seconds": 31.903419494628906,
+      "size_bytes": 62642748
+    }
+  },
+  "estimated_completion": "2025-11-22 00:36:50",
+  "avg_time_per_batch": 43.81994318962097
+}

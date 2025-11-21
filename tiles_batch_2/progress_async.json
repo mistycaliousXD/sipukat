@@ -1,0 +1,46 @@
+{
+  "total_tiles": 24320,
+  "total_batches": 12,
+  "completed_batches": [
+    1,
+    2
+  ],
+  "current_batch": 3,
+  "tiles_downloaded": 3319,
+  "tiles_failed": 0,
+  "start_time": "2025-11-12T00:06:02.413332",
+  "last_update": "2025-11-12 00:12:56",
+  "config": {
+    "x_start": 1729154,
+    "x_end": 1729409,
+    "y_start": 1051905,
+    "y_end": 1051999,
+    "zoom": 21,
+    "variant": 2,
+    "batch_size": 50,
+    "max_concurrent": 500,
+    "tiles_folder": "tiles_batch_2"
+  },
+  "batch_details": {
+    "1": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2429,
+      "skipped": 71,
+      "failed": 0,
+      "time_seconds": 144.72698664665222,
+      "size_bytes": 349391077
+    },
+    "2": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 890,
+      "skipped": 1610,
+      "failed": 0,
+      "time_seconds": 269.15266251564026,
+      "size_bytes": 91942442
+    }
+  },
+  "estimated_completion": "2025-11-12 00:47:25",
+  "avg_time_per_batch": 206.95638370513916
+}

@@ -32,10 +32,9 @@ if sys.platform == 'win32':
         pass
 
 # ============= KONFIGURASI =============
-GEOREF_DIR = Path("georeferenced")
-MERGED_DIR = Path("merged")
+DEFAULT_GEOREF_SUFFIX = "_georeferenced"
+DEFAULT_MERGED_SUFFIX = "_merged"
 OUTPUT_GEOTIFF = "merged_map.tif"
-WATCH_PROGRESS_FILE = MERGED_DIR / "watch_mode_progress.json"
 
 # Global flag for graceful shutdown
 SHUTDOWN_REQUESTED = False
@@ -133,17 +132,41 @@ def get_tile_bounds(x: int, y: int, zoom: int):
     return lon_left, lat_bottom, lon_right, lat_top
 
 
-def check_batch_ready(batch_num):
+def list_available_georef_folders():
+    """List all available georeferenced folders"""
+    folders = []
+
+    # Search for directories ending with _georeferenced or containing georeferenced_batch folders
+    for path in Path('.').iterdir():
+        if path.is_dir():
+            # Check if it contains georeferenced_batch folders
+            batch_dirs = list(path.glob("georeferenced_batch_*"))
+            if batch_dirs:
+                batch_count = len(batch_dirs)
+                # Count total tiles
+                total_tiles = sum(len(list(bd.glob("tile_*.tif"))) for bd in batch_dirs)
+                folders.append({
+                    'name': path.name,
+                    'path': path,
+                    'batch_count': batch_count,
+                    'total_tiles': total_tiles
+                })
+
+    return sorted(folders, key=lambda x: x['name'])
+
+
+def check_batch_ready(batch_num, georef_dir):
     """Check if a batch is georeferenced and ready for merging
 
     Args:
         batch_num: Batch number to check
+        georef_dir: Georeferenced directory path
 
     Returns:
         dict with 'ready' (bool), 'path' (Path), 'tiles_count' (int), 'tiles' (list)
         or None if not ready
     """
-    batch_dir = GEOREF_DIR / f"georeferenced_batch_{batch_num:03d}"
+    batch_dir = georef_dir / f"georeferenced_batch_{batch_num:03d}"
 
     if not batch_dir.exists() or not batch_dir.is_dir():
         return None
@@ -162,13 +185,18 @@ def check_batch_ready(batch_num):
     }
 
 
-def find_georeferenced_batches(batch_filter=None):
-    """Find all georeferenced batches"""
-    if not GEOREF_DIR.exists():
+def find_georeferenced_batches(georef_dir, batch_filter=None):
+    """Find all georeferenced batches
+
+    Args:
+        georef_dir: Georeferenced directory path
+        batch_filter: List of batch numbers to filter
+    """
+    if not georef_dir.exists():
         return []
 
     batches = []
-    for batch_dir in sorted(GEOREF_DIR.glob("georeferenced_batch_*")):
+    for batch_dir in sorted(georef_dir.glob("georeferenced_batch_*")):
         if batch_dir.is_dir():
             batch_num = int(batch_dir.name.split('_')[-1])
 
@@ -421,6 +449,7 @@ def process_single_batch(batch_info):
     batch = batch_info['batch']
     batch_num = batch['batch_num']
     output_dir = batch_info['output_dir']
+    compress = batch_info.get('compress', False)
 
     try:
         # Create VRT untuk single batch
@@ -432,7 +461,7 @@ def process_single_batch(batch_info):
             return (False, batch_num, None, "Failed to create VRT")
 
         # Merge to GeoTIFF (silent mode)
-        if not merge_to_geotiff(vrt_file, output_tif, verbose=False):
+        if not merge_to_geotiff(vrt_file, output_tif, verbose=False, compress=compress):
             return (False, batch_num, None, "Failed to merge to GeoTIFF")
 
         # Clean up VRT and tile list
@@ -449,10 +478,11 @@ def process_single_batch(batch_info):
         return (False, batch_num, None, str(e))
 
 
-def process_batches_parallel(batches, output_dir, max_workers=None):
+def process_batches_parallel(batches, output_dir, max_workers=None, compress=False):
     """
     Process multiple batches in parallel
     max_workers: Number of parallel processes (default: CPU count for I/O-bound tasks)
+    compress: Use LZW compression
     """
     if max_workers is None:
         # Use all CPU cores for I/O-bound tasks (merge is I/O heavy)
@@ -463,7 +493,7 @@ def process_batches_parallel(batches, output_dir, max_workers=None):
 
     # Prepare batch info
     batch_infos = [
-        {'batch': batch, 'output_dir': output_dir}
+        {'batch': batch, 'output_dir': output_dir, 'compress': compress}
         for batch in batches
     ]
 
@@ -511,29 +541,31 @@ def process_batches_parallel(batches, output_dir, max_workers=None):
     return results
 
 
-def merge_single_batch(batch_num, compress=False):
+def merge_single_batch(batch_num, georef_dir, merged_dir, compress=False):
     """Merge a single batch to individual GeoTIFF file
 
     Args:
         batch_num: Batch number to merge
+        georef_dir: Georeferenced directory path
+        merged_dir: Merged output directory path
         compress: Use LZW compression
 
     Returns:
         tuple: (success: bool, output_file: Path, error_message: str)
     """
     # Check if batch is ready
-    batch_info = check_batch_ready(batch_num)
+    batch_info = check_batch_ready(batch_num, georef_dir)
     if not batch_info:
         return (False, None, f"Batch {batch_num} not ready or not found")
 
     # Check if already merged
-    output_file = MERGED_DIR / f"merged_batch_{batch_num:03d}.tif"
+    output_file = merged_dir / f"merged_batch_{batch_num:03d}.tif"
     if output_file.exists():
         return (True, output_file, "Already exists (skipped)")
 
     try:
         # Create VRT for this batch
-        vrt_file = MERGED_DIR / f"batch_{batch_num:03d}.vrt"
+        vrt_file = merged_dir / f"batch_{batch_num:03d}.vrt"
 
         if not create_vrt([batch_info], vrt_file, verbose=False):
             return (False, None, "VRT creation failed")
@@ -546,7 +578,7 @@ def merge_single_batch(batch_num, compress=False):
         if vrt_file.exists():
             vrt_file.unlink()
 
-        tile_list = MERGED_DIR / f"tile_list_{vrt_file.stem}.txt"
+        tile_list = merged_dir / f"tile_list_{vrt_file.stem}.txt"
         if tile_list.exists():
             tile_list.unlink()
 
@@ -557,11 +589,12 @@ def merge_single_batch(batch_num, compress=False):
         return (False, None, str(e))
 
 
-def load_watch_progress():
+def load_watch_progress(merged_dir):
     """Load watch mode progress from JSON file"""
-    if WATCH_PROGRESS_FILE.exists():
+    progress_file = merged_dir / "watch_mode_progress.json"
+    if progress_file.exists():
         try:
-            with open(WATCH_PROGRESS_FILE, 'r') as f:
+            with open(progress_file, 'r') as f:
                 return json.load(f)
         except:
             pass
@@ -576,12 +609,13 @@ def load_watch_progress():
     }
 
 
-def save_watch_progress(progress_data):
+def save_watch_progress(progress_data, merged_dir):
     """Save watch mode progress to JSON file"""
-    MERGED_DIR.mkdir(parents=True, exist_ok=True)
+    merged_dir.mkdir(parents=True, exist_ok=True)
     progress_data['last_update'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    with open(WATCH_PROGRESS_FILE, 'w') as f:
+    progress_file = merged_dir / "watch_mode_progress.json"
+    with open(progress_file, 'w') as f:
         json.dump(progress_data, f, indent=2)
 
 
@@ -592,11 +626,13 @@ def signal_handler(sig, frame):
     SHUTDOWN_REQUESTED = True
 
 
-def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=False, max_workers=None):
+def watch_and_merge(batch_list, georef_dir, merged_dir, check_interval=30, compress=False, parallel=False, max_workers=None):
     """Watch for georeferenced batches and merge automatically
 
     Args:
         batch_list: List of batch numbers to watch and merge
+        georef_dir: Georeferenced directory path
+        merged_dir: Merged output directory path
         check_interval: Seconds between checks (default: 30)
         compress: Use LZW compression
         parallel: Merge multiple batches in parallel (default: False)
@@ -623,7 +659,7 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
     print()
 
     # Load or create progress
-    progress = load_watch_progress()
+    progress = load_watch_progress(merged_dir)
 
     # Initialize if first run
     if not progress['start_time']:
@@ -641,7 +677,7 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
         if batch_num in progress['merged']:
             continue  # Already merged
 
-        if check_batch_ready(batch_num):
+        if check_batch_ready(batch_num, georef_dir):
             ready_batches.append(batch_num)
         else:
             waiting_batches.append(batch_num)
@@ -670,7 +706,7 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 # Submit all merge tasks
                 future_to_batch = {
-                    executor.submit(merge_single_batch, batch_num, compress): batch_num
+                    executor.submit(merge_single_batch, batch_num, georef_dir, merged_dir, compress): batch_num
                     for batch_num in ready_batches
                     if not SHUTDOWN_REQUESTED
                 }
@@ -694,14 +730,14 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
                         print(f"❌ Failed batch {batch_num:03d}: {str(e)}")
                         progress['failed'].append(batch_num)
 
-                    save_watch_progress(progress)
+                    save_watch_progress(progress, merged_dir)
         else:
             # SEQUENTIAL MERGE (original behavior)
             for batch_num in ready_batches:
                 if SHUTDOWN_REQUESTED:
                     break
 
-                success, output_file, message = merge_single_batch(batch_num, compress=compress)
+                success, output_file, message = merge_single_batch(batch_num, georef_dir, merged_dir, compress=compress)
                 if success:
                     print(f"✅ Merged batch {batch_num:03d} → {output_file.name} ({message})")
                     progress['merged'].append(batch_num)
@@ -710,7 +746,7 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
                     print(f"❌ Failed batch {batch_num:03d}: {message}")
                     progress['failed'].append(batch_num)
 
-                save_watch_progress(progress)
+                save_watch_progress(progress, merged_dir)
 
         print()
 
@@ -731,7 +767,7 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
                 if SHUTDOWN_REQUESTED:
                     break
 
-                if check_batch_ready(batch_num):
+                if check_batch_ready(batch_num, georef_dir):
                     newly_ready.append(batch_num)
 
             if newly_ready:
@@ -742,7 +778,7 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
 
                     with ThreadPoolExecutor(max_workers=max_workers) as executor:
                         future_to_batch = {
-                            executor.submit(merge_single_batch, batch_num, compress): batch_num
+                            executor.submit(merge_single_batch, batch_num, georef_dir, merged_dir, compress): batch_num
                             for batch_num in newly_ready
                             if not SHUTDOWN_REQUESTED
                         }
@@ -770,7 +806,7 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
                                 if batch_num in progress['waiting']:
                                     progress['waiting'].remove(batch_num)
 
-                            save_watch_progress(progress)
+                            save_watch_progress(progress, merged_dir)
                 else:
                     # SEQUENTIAL MERGE for newly ready batches
                     for batch_num in newly_ready:
@@ -780,7 +816,7 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
                         print(f"✅ New batch ready: {batch_num:03d}")
                         print(f"🔨 Merging batch {batch_num:03d}...")
 
-                        success, output_file, message = merge_single_batch(batch_num, compress=compress)
+                        success, output_file, message = merge_single_batch(batch_num, georef_dir, merged_dir, compress=compress)
                         if success:
                             print(f"✅ Merged batch {batch_num:03d} → {output_file.name} ({message})")
                             progress['merged'].append(batch_num)
@@ -790,7 +826,7 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
                             progress['failed'].append(batch_num)
                             progress['waiting'].remove(batch_num)
 
-                        save_watch_progress(progress)
+                        save_watch_progress(progress, merged_dir)
 
                 print(f"⏳ Waiting: {len(progress['waiting'])} batches remaining")
                 print()
@@ -798,8 +834,9 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
                 print(f"⏳ Waiting: {len(progress['waiting'])} batches remaining")
 
     # Final summary
-    save_watch_progress(progress)
+    save_watch_progress(progress, merged_dir)
 
+    progress_file = merged_dir / "watch_mode_progress.json"
     print("\n" + "=" * 60)
     if SHUTDOWN_REQUESTED:
         print("⏸️  WATCH MODE STOPPED")
@@ -810,8 +847,8 @@ def watch_and_merge(batch_list, check_interval=30, compress=False, parallel=Fals
     if progress['failed']:
         print(f"❌ Failed: {len(progress['failed'])} batches")
         print(f"   {', '.join(map(str, progress['failed']))}")
-    print(f"📁 Output directory: {MERGED_DIR.absolute()}/")
-    print(f"💾 Progress saved: {WATCH_PROGRESS_FILE}")
+    print(f"📁 Output directory: {merged_dir.absolute()}/")
+    print(f"💾 Progress saved: {progress_file}")
     print()
 
     return progress
@@ -838,9 +875,12 @@ def write_merge_log(batches, output_file, log_file):
 
 def main():
     parser = argparse.ArgumentParser(description='GeoTIFF Merger - Optimized for Speed')
+    parser.add_argument('--georef-folder', type=str, help='Folder georeferenced yang akan di-merge')
+    parser.add_argument('--output', type=str, help='Custom output folder untuk hasil merged')
     parser.add_argument('--batches', help='Comma-separated batch numbers (e.g., 1,2,5,10)')
     parser.add_argument('--batch-range', help='Batch range (e.g., 1-20)')
     parser.add_argument('--list', action='store_true', help='List available batches')
+    parser.add_argument('--list-folders', action='store_true', help='List available georef folders')
     parser.add_argument('--parallel', action='store_true', help='Process multiple batches in parallel (faster for multiple batches)')
     parser.add_argument('--workers', type=int, default=None, help='Number of parallel workers (default: CPU count)')
     parser.add_argument('--single-file', action='store_true', help='Merge all batches into single GeoTIFF (slower but one file)')
@@ -851,12 +891,98 @@ def main():
 
     args = parser.parse_args()
 
+    print("=" * 60)
+    print("   GeoTIFF Merger - OPTIMIZED")
+    print("=" * 60)
+    print()
+
+    # List folders mode
+    if args.list_folders:
+        folders = list_available_georef_folders()
+        if not folders:
+            print("❌ Tidak ada folder georeferenced ditemukan!")
+            return
+
+        print(f"📁 Available Georeferenced Folders ({len(folders)}):\n")
+        for folder in folders:
+            print(f"   📂 {folder['name']}: {folder['batch_count']} batches, {folder['total_tiles']:,} tiles")
+        print()
+        return
+
+    # Determine georef directory
+    georef_dir = None
+    if args.georef_folder:
+        georef_dir = Path(args.georef_folder)
+        if not georef_dir.exists():
+            print(f"❌ Folder '{args.georef_folder}' tidak ditemukan!")
+            return
+    else:
+        # Interactive folder selection
+        folders = list_available_georef_folders()
+
+        if not folders:
+            print("❌ Tidak ada folder georeferenced ditemukan!")
+            print(f"   Jalankan georeference_batch.py terlebih dahulu")
+            return
+        elif len(folders) == 1:
+            # Only one folder, use it automatically
+            georef_dir = folders[0]['path']
+            print(f"📂 Menggunakan folder: {georef_dir.name} ({folders[0]['batch_count']} batches)")
+        else:
+            # Multiple folders, ask user to choose
+            print(f"📁 Available Georeferenced Folders ({len(folders)}):\n")
+            for i, folder in enumerate(folders, 1):
+                print(f"   {i}. {folder['name']}: {folder['batch_count']} batches, {folder['total_tiles']:,} tiles")
+            print()
+
+            choice = input("Pilih folder (nomor atau nama): ").strip()
+
+            # Try as number first
+            try:
+                idx = int(choice) - 1
+                if 0 <= idx < len(folders):
+                    georef_dir = folders[idx]['path']
+                else:
+                    print("❌ Nomor tidak valid")
+                    return
+            except ValueError:
+                # Try as folder name
+                folder = next((f for f in folders if f['name'] == choice), None)
+                if folder:
+                    georef_dir = folder['path']
+                else:
+                    print(f"❌ Folder '{choice}' tidak ditemukan")
+                    return
+
+    # Determine output directory
+    if args.output:
+        merged_dir = Path(args.output)
+        print(f"📂 Georef Folder: {georef_dir.absolute()}")
+        print(f"📂 Output Folder (custom): {merged_dir.absolute()}")
+    else:
+        # Ask for custom output folder name
+        print(f"\n📂 Georef Folder: {georef_dir.absolute()}")
+        default_output = str(georef_dir) + DEFAULT_MERGED_SUFFIX
+        print(f"📂 Default Output: {Path(default_output).absolute()}")
+        print()
+
+        output_input = input(f"📁 Nama folder output (Enter untuk default): ").strip()
+
+        if output_input:
+            merged_dir = Path(output_input)
+            print(f"📂 Output Folder: {merged_dir.absolute()}")
+        else:
+            merged_dir = Path(default_output)
+            print(f"📂 Output Folder: {merged_dir.absolute()}")
+
+    print()
+
     # WATCH MODE or RESUME
     if args.watch or args.resume:
         # Get batch list from args or progress file
         if args.resume:
             # Load from progress file
-            progress = load_watch_progress()
+            progress = load_watch_progress(merged_dir)
             if not progress['batches_requested']:
                 print("❌ No previous watch session found")
                 print(f"   Start a new watch session with --watch")
@@ -883,6 +1009,8 @@ def main():
 
         # Start watch and merge
         watch_and_merge(batch_list,
+                        georef_dir,
+                        merged_dir,
                         check_interval=args.check_interval,
                         compress=args.compress,
                         parallel=args.parallel,
@@ -890,11 +1018,6 @@ def main():
         return
 
     # NORMAL MODE: Continue with existing logic
-    print("=" * 60)
-    print("   GeoTIFF Merger - OPTIMIZED")
-    print("=" * 60)
-    print()
-
     # Find batches
     batch_filter = None
 
@@ -908,7 +1031,7 @@ def main():
             print("❌ Invalid batch range format")
             return
 
-    batches = find_georeferenced_batches(batch_filter)
+    batches = find_georeferenced_batches(georef_dir, batch_filter)
 
     if not batches:
         print("❌ Tidak ada georeferenced batches ditemukan!")
@@ -956,13 +1079,13 @@ def main():
     print()
 
     # Create output directory
-    MERGED_DIR.mkdir(parents=True, exist_ok=True)
+    merged_dir.mkdir(parents=True, exist_ok=True)
 
     start_time = datetime.now()
 
     # PARALLEL MODE: Process batches in parallel
     if args.parallel and len(batches) > 1:
-        results = process_batches_parallel(batches, MERGED_DIR, args.workers)
+        results = process_batches_parallel(batches, merged_dir, args.workers, args.compress)
 
         # Summary
         successful = [r for r in results if r['success']]
@@ -987,20 +1110,20 @@ def main():
     # SINGLE FILE MODE: Merge all to one GeoTIFF
     else:
         # Create VRT
-        vrt_file = MERGED_DIR / "mosaic.vrt"
+        vrt_file = merged_dir / "mosaic.vrt"
         if not create_vrt(batches, vrt_file):
             return
 
         # Generate unique output filename
         base_name = OUTPUT_GEOTIFF.replace(".tif", "").replace(".TIF", "")
-        output_geotiff = get_unique_filename(MERGED_DIR, base_name, ".tif")
+        output_geotiff = get_unique_filename(merged_dir, base_name, ".tif")
 
         print(f"📁 Output file: {output_geotiff.name}\n")
 
         # Merge to GeoTIFF with optional compression
         if merge_to_geotiff(vrt_file, output_geotiff, compress=args.compress):
             # Write log
-            log_file = MERGED_DIR / f"merge_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+            log_file = merged_dir / f"merge_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
             write_merge_log(batches, output_geotiff, log_file)
 
             print("\n" + "=" * 60)

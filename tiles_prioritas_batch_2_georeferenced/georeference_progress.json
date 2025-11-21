@@ -1,0 +1,1268 @@
+{
+  "completed_batches": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "batch_details": {
+    "1": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2403,
+      "skipped": 0,
+      "failed": 97,
+      "time_seconds": 198.11795353889465,
+      "failed_tiles": [
+        {
+          "tile": "tile_21_1729154_1051908.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729154_1051917.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729155_1051911.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729155_1051920.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729155_1051924.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729155_1051931.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729155_1051941.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729155_1051948.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729156_1051927.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729157_1051919.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729157_1051936.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729157_1051939.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729157_1051943.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729158_1051925.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729158_1051943.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729158_1051950.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729159_1051906.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729159_1051907.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729159_1051914.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729159_1051934.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729159_1051937.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729160_1051922.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729160_1051919.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729160_1051929.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729160_1051945.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729160_1051943.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729160_1051947.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729161_1051923.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729161_1051948.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729162_1051925.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729162_1051935.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729162_1051947.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729163_1051911.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729163_1051914.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729163_1051937.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729163_1051945.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729166_1051924.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729166_1051941.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729167_1051926.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729168_1051927.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729169_1051931.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729170_1051906.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729170_1051942.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729171_1051905.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729171_1051910.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729171_1051914.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729172_1051909.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729172_1051914.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729172_1051939.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729172_1051945.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729173_1051926.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729173_1051930.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729173_1051946.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729174_1051920.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729174_1051943.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729174_1051953.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729175_1051911.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729175_1051919.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729175_1051947.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729176_1051911.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729177_1051912.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729177_1051921.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729177_1051927.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729178_1051907.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729178_1051925.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729180_1051948.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729181_1051951.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729181_1051954.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729182_1051912.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729182_1051916.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729182_1051921.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729183_1051917.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729183_1051924.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729183_1051930.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729183_1051941.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729183_1051953.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729184_1051912.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729184_1051930.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729184_1051952.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729185_1051908.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729185_1051923.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729185_1051951.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729188_1051911.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729189_1051921.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729189_1051953.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729190_1051926.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729190_1051930.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729191_1051943.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729192_1051909.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729192_1051917.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729192_1051927.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729192_1051929.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729193_1051939.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729194_1051907.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729194_1051934.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729194_1051944.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729200_1051950.jpg",
+          "error": ""
+        }
+      ]
+    },
+    "2": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2353,
+      "skipped": 0,
+      "failed": 147,
+      "time_seconds": 187.18816113471985,
+      "failed_tiles": [
+        {
+          "tile": "tile_21_1729204_1051909.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729204_1051910.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729204_1051914.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729204_1051912.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729204_1051925.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729204_1051928.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729204_1051929.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729204_1051936.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729204_1051937.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729204_1051943.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729204_1051953.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729205_1051905.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729205_1051913.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729205_1051914.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729205_1051917.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729205_1051919.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729205_1051933.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729205_1051932.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729205_1051941.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729205_1051953.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051907.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051911.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051912.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051919.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051921.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051923.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051926.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051924.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051930.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051927.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051938.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051944.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051949.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729206_1051952.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051908.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051912.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051910.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051913.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051918.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051920.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051925.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051928.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051931.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051941.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051943.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051948.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729207_1051954.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729208_1051912.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729208_1051910.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729208_1051922.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729208_1051923.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729208_1051931.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729208_1051934.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729208_1051937.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729208_1051940.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729208_1051942.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729208_1051945.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729209_1051907.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729209_1051916.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729209_1051926.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729210_1051913.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729210_1051917.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729210_1051923.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729210_1051935.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729210_1051939.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729210_1051942.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729210_1051945.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729210_1051952.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051905.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051909.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051907.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051913.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051915.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051914.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051917.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051921.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051922.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051923.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051931.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051933.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051936.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051934.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051938.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051941.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051939.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051943.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051944.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729211_1051946.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729212_1051906.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729212_1051909.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729212_1051910.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729212_1051915.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729212_1051917.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729212_1051918.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729212_1051926.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729212_1051928.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729213_1051909.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729213_1051917.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729213_1051921.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729213_1051925.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729213_1051942.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729213_1051946.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729213_1051948.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729213_1051949.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729213_1051945.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729213_1051951.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051907.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051909.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051906.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051912.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051911.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051914.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051915.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051917.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051916.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051920.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051918.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051921.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051922.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051919.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051925.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051926.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051927.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051928.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051929.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051931.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051934.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051932.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051935.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051938.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051936.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051939.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051941.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051942.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051943.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051944.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051946.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051949.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729214_1051950.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729216_1051950.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729221_1051922.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729223_1051931.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729234_1051946.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729235_1051948.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729237_1051954.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729238_1051936.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729243_1051939.jpg",
+          "error": ""
+        }
+      ]
+    },
+    "3": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2500,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 66.64106845855713,
+      "failed_tiles": []
+    },
+    "4": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2500,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 69.27789688110352,
+      "failed_tiles": []
+    },
+    "5": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2499,
+      "skipped": 0,
+      "failed": 1,
+      "time_seconds": 78.24077415466309,
+      "failed_tiles": [
+        {
+          "tile": "tile_21_1729394_1051944.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729394_1051944.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        }
+      ]
+    },
+    "6": {
+      "status": "completed",
+      "tiles": 300,
+      "success": 300,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 9.672266721725464,
+      "failed_tiles": []
+    },
+    "7": {
+      "status": "completed",
+      "tiles": 2250,
+      "success": 2217,
+      "skipped": 0,
+      "failed": 33,
+      "time_seconds": 89.06005382537842,
+      "failed_tiles": [
+        {
+          "tile": "tile_21_1729154_1051956.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729154_1051960.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729155_1051960.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729155_1051967.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729156_1051962.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729156_1051965.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729157_1051956.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729158_1051955.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729160_1051957.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729160_1051959.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729160_1051962.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729161_1051965.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729161_1051966.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729161_1051967.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729163_1051958.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729163_1051957.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729165_1051956.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729165_1051957.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729165_1051955.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729174_1051963.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729175_1051955.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729175_1051963.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729176_1051955.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729176_1051958.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729178_1051962.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729178_1051961.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729178_1051964.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729178_1051963.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729178_1051966.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729190_1051963.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729191_1051958.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729191_1051959.jpg",
+          "error": ""
+        },
+        {
+          "tile": "tile_21_1729193_1051962.jpg",
+          "error": ""
+        }
+      ]
+    },
+    "8": {
+      "status": "completed",
+      "tiles": 2250,
+      "success": 2250,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 59.95033669471741,
+      "failed_tiles": []
+    },
+    "9": {
+      "status": "completed",
+      "tiles": 2250,
+      "success": 2250,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 54.11932420730591,
+      "failed_tiles": []
+    },
+    "10": {
+      "status": "completed",
+      "tiles": 2250,
+      "success": 2244,
+      "skipped": 0,
+      "failed": 6,
+      "time_seconds": 75.1937906742096,
+      "failed_tiles": [
+        {
+          "tile": "tile_21_1729304_1051962.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729304_1051962.jpg, band 1: IReadBlock failed at X offset 0, Y offset 48: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729305_1051960.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729305_1051960.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729314_1051973.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729314_1051973.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729318_1051981.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729318_1051981.jpg, band 1: IReadBlock failed at X offset 0, Y offset 144: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729319_1051958.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729319_1051958.jpg, band 1: IReadBlock failed at X offset 0, Y offset 80: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729319_1051968.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729319_1051968.jpg, band 1: IReadBlock failed at X offset 0, Y offset 144: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        }
+      ]
+    },
+    "11": {
+      "status": "completed",
+      "tiles": 2250,
+      "success": 2250,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 68.46295213699341,
+      "failed_tiles": []
+    },
+    "12": {
+      "status": "completed",
+      "tiles": 270,
+      "success": 270,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 5.734010457992554,
+      "failed_tiles": []
+    }
+  },
+  "last_update": "2025-11-13 09:14:46"
+}

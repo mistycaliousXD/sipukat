@@ -30,9 +30,8 @@ except ImportError:
     HAS_TQDM = False
 
 # ============= KONFIGURASI =============
-TILES_DIR = Path("tiles")
-GEOREF_DIR = Path("georeferenced")
-PROGRESS_FILE = GEOREF_DIR / "georeference_progress.json"
+DEFAULT_TILES_DIR = "tiles"
+DEFAULT_GEOREF_SUFFIX = "_georeferenced"
 MAX_WORKERS = 4  # CPU intensive, don't use too many
 
 
@@ -103,17 +102,38 @@ def georeference_tile(tile_path: Path, output_path: Path, x: int, y: int, zoom: 
         return {'status': 'failed', 'tile': tile_path.name, 'error': str(e)}
 
 
-def list_available_batches(count_tiles=False):
+def list_available_folders():
+    """List all available tile folders"""
+    folders = []
+
+    # Search for directories containing tiles_batch_* folders
+    for path in Path('.').iterdir():
+        if path.is_dir():
+            # Check if it contains tiles_batch folders
+            batch_dirs = list(path.glob("tiles_batch_*"))
+            if batch_dirs:
+                batch_count = len(batch_dirs)
+                folders.append({
+                    'name': path.name,
+                    'path': path,
+                    'batch_count': batch_count
+                })
+
+    return sorted(folders, key=lambda x: x['name'])
+
+
+def list_available_batches(tiles_dir, count_tiles=False):
     """List all available tile batches
 
     Args:
+        tiles_dir: Path to tiles directory
         count_tiles: If True, count tiles eagerly. If False, set tiles_count to None (lazy loading)
     """
-    if not TILES_DIR.exists():
+    if not tiles_dir.exists():
         return []
 
     batches = []
-    for batch_dir in sorted(TILES_DIR.glob("tiles_batch_*")):
+    for batch_dir in sorted(tiles_dir.glob("tiles_batch_*")):
         if batch_dir.is_dir():
             batch_num = int(batch_dir.name.split('_')[-1])
             # Only count tiles if explicitly requested (e.g., for --list mode)
@@ -139,31 +159,33 @@ def get_batch_tile_count(batch_path):
     return len(list(batch_path.glob("*.jpg")))
 
 
-def load_progress():
+def load_progress(georef_dir):
     """Load georeference progress"""
-    if PROGRESS_FILE.exists():
+    progress_file = georef_dir / "georeference_progress.json"
+    if progress_file.exists():
         try:
-            with open(PROGRESS_FILE, 'r') as f:
+            with open(progress_file, 'r') as f:
                 return json.load(f)
         except:
             return {'completed_batches': [], 'batch_details': {}}
     return {'completed_batches': [], 'batch_details': {}}
 
 
-def save_progress(progress_data):
+def save_progress(progress_data, georef_dir):
     """Save georeference progress"""
-    GEOREF_DIR.mkdir(parents=True, exist_ok=True)
+    georef_dir.mkdir(parents=True, exist_ok=True)
     progress_data['last_update'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    with open(PROGRESS_FILE, 'w') as f:
+    progress_file = georef_dir / "georeference_progress.json"
+    with open(progress_file, 'w') as f:
         json.dump(progress_data, f, indent=2)
 
 
-def georeference_batch(batch_info, progress_data):
+def georeference_batch(batch_info, progress_data, georef_dir):
     """Georeference all tiles in a batch"""
     batch_num = batch_info['batch_num']
     batch_dir = batch_info['path']
-    output_dir = GEOREF_DIR / f"georeferenced_batch_{batch_num:03d}"
+    output_dir = georef_dir / f"georeferenced_batch_{batch_num:03d}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Get all tiles in batch
@@ -246,7 +268,7 @@ def georeference_batch(batch_info, progress_data):
     if batch_num not in progress_data['completed_batches']:
         progress_data['completed_batches'].append(batch_num)
 
-    save_progress(progress_data)
+    save_progress(progress_data, georef_dir)
 
     # Print summary
     print(f"✅ Batch {batch_num} selesai!")
@@ -259,10 +281,13 @@ def georeference_batch(batch_info, progress_data):
 
 def main():
     parser = argparse.ArgumentParser(description='Batch Georeferencer')
+    parser.add_argument('--folder', type=str, help='Folder tiles yang akan di-georeference')
+    parser.add_argument('--output', type=str, help='Custom output folder untuk hasil georeferenced')
     parser.add_argument('--batch', type=int, help='Process batch tertentu')
     parser.add_argument('--batch-range', help='Process batch range (e.g., 1-10)')
     parser.add_argument('--all', action='store_true', help='Process semua batch')
     parser.add_argument('--list', action='store_true', help='List available batches')
+    parser.add_argument('--list-folders', action='store_true', help='List available tile folders')
 
     args = parser.parse_args()
 
@@ -271,14 +296,98 @@ def main():
     print("=" * 60)
     print()
 
+    # List folders mode
+    if args.list_folders:
+        folders = list_available_folders()
+        if not folders:
+            print("❌ Tidak ada folder tiles ditemukan!")
+            return
+
+        print(f"📁 Available Tile Folders ({len(folders)}):\n")
+        for folder in folders:
+            print(f"   📂 {folder['name']}: {folder['batch_count']} batches")
+        print()
+        return
+
+    # Determine tiles directory
+    tiles_dir = None
+    if args.folder:
+        tiles_dir = Path(args.folder)
+        if not tiles_dir.exists():
+            print(f"❌ Folder '{args.folder}' tidak ditemukan!")
+            return
+    else:
+        # Interactive folder selection
+        folders = list_available_folders()
+
+        if not folders:
+            # Fallback to default
+            tiles_dir = Path(DEFAULT_TILES_DIR)
+            if not tiles_dir.exists():
+                print("❌ Tidak ada folder tiles ditemukan!")
+                print(f"   Jalankan download_tiles_async.py terlebih dahulu")
+                return
+            print(f"📂 Menggunakan folder default: {tiles_dir.name}")
+        elif len(folders) == 1:
+            # Only one folder, use it automatically
+            tiles_dir = folders[0]['path']
+            print(f"📂 Menggunakan folder: {tiles_dir.name} ({folders[0]['batch_count']} batches)")
+        else:
+            # Multiple folders, ask user to choose
+            print(f"📁 Available Tile Folders ({len(folders)}):\n")
+            for i, folder in enumerate(folders, 1):
+                print(f"   {i}. {folder['name']}: {folder['batch_count']} batches")
+            print()
+
+            choice = input("Pilih folder (nomor atau nama): ").strip()
+
+            # Try as number first
+            try:
+                idx = int(choice) - 1
+                if 0 <= idx < len(folders):
+                    tiles_dir = folders[idx]['path']
+                else:
+                    print("❌ Nomor tidak valid")
+                    return
+            except ValueError:
+                # Try as folder name
+                folder = next((f for f in folders if f['name'] == choice), None)
+                if folder:
+                    tiles_dir = folder['path']
+                else:
+                    print(f"❌ Folder '{choice}' tidak ditemukan")
+                    return
+
+    # Determine output directory
+    if args.output:
+        georef_dir = Path(args.output)
+        print(f"\n📂 Tiles Folder: {tiles_dir.absolute()}")
+        print(f"📂 Output Folder (custom): {georef_dir.absolute()}")
+    else:
+        # Ask for custom output folder name
+        print(f"\n📂 Tiles Folder: {tiles_dir.absolute()}")
+        default_output = str(tiles_dir) + DEFAULT_GEOREF_SUFFIX
+        print(f"📂 Default Output: {Path(default_output).absolute()}")
+        print()
+
+        output_input = input(f"📁 Nama folder output (Enter untuk default): ").strip()
+
+        if output_input:
+            georef_dir = Path(output_input)
+            print(f"📂 Output Folder: {georef_dir.absolute()}")
+        else:
+            georef_dir = Path(default_output)
+            print(f"📂 Output Folder: {georef_dir.absolute()}")
+
+    print()
+
     # List available batches (fast mode - no tile counting)
     print("🔍 Scanning batches...", end='', flush=True)
-    available_batches = list_available_batches(count_tiles=False)
+    available_batches = list_available_batches(tiles_dir, count_tiles=False)
     print(f" Found {len(available_batches)} batches")
 
     if not available_batches:
-        print("❌ Tidak ada tiles batches ditemukan!")
-        print(f"   Jalankan download_tiles_batch.py terlebih dahulu")
+        print("❌ Tidak ada tiles batches ditemukan di folder ini!")
         return
 
     # List mode - need to count tiles for display
@@ -293,7 +402,7 @@ def main():
         return
 
     # Load progress
-    progress = load_progress()
+    progress = load_progress(georef_dir)
 
     # Determine which batches to process
     batches_to_process = []
@@ -387,19 +496,20 @@ def main():
             print(f"Progress: {i}/{len(batches_to_process)} batches")
             print(f"{'='*60}")
 
-            georeference_batch(batch, progress)
+            georeference_batch(batch, progress, georef_dir)
 
         # Final summary
         print("\n" + "=" * 60)
         print("✅ GEOREFERENCE SELESAI!")
         print("=" * 60)
         print(f"Total batches processed: {len(batches_to_process)}")
-        print(f"Output directory: {GEOREF_DIR.absolute()}/")
+        print(f"Output directory: {georef_dir.absolute()}/")
         print()
 
     except KeyboardInterrupt:
         print("\n\n⏸️  Processing di-pause")
-        print(f"   Progress tersimpan di: {PROGRESS_FILE}")
+        progress_file = georef_dir / "georeference_progress.json"
+        print(f"   Progress tersimpan di: {progress_file}")
         print()
 
 

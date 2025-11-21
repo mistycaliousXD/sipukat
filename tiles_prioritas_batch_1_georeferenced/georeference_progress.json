@@ -1,0 +1,575 @@
+{
+  "completed_batches": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "batch_details": {
+    "1": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2500,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 92.69255709648132,
+      "failed_tiles": []
+    },
+    "2": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2500,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 68.04160332679749,
+      "failed_tiles": []
+    },
+    "3": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2500,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 97.9219970703125,
+      "failed_tiles": []
+    },
+    "4": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2438,
+      "skipped": 0,
+      "failed": 62,
+      "time_seconds": 94.1198046207428,
+      "failed_tiles": [
+        {
+          "tile": "tile_21_1729300_1051526.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729300_1051526.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729300_1051531.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729300_1051531.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729300_1051544.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729300_1051544.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729300_1051547.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729300_1051547.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729300_1051546.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729300_1051546.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729301_1051544.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729301_1051544.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729301_1051543.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729301_1051543.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729301_1051542.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729301_1051542.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729301_1051547.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729301_1051547.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729301_1051548.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729301_1051548.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729301_1051546.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729301_1051546.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729301_1051550.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729301_1051550.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729302_1051523.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729302_1051523.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729302_1051534.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729302_1051534.jpg, band 1: IReadBlock failed at X offset 0, Y offset 240: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729302_1051532.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729302_1051532.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729302_1051537.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729302_1051537.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729302_1051547.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729302_1051547.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729302_1051556.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729302_1051556.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729302_1051564.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729302_1051564.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729302_1051566.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729302_1051566.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729303_1051533.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729303_1051533.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729304_1051533.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729304_1051533.jpg, band 1: IReadBlock failed at X offset 0, Y offset 144: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729304_1051537.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729304_1051537.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729304_1051542.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729304_1051542.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729304_1051549.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729304_1051549.jpg, band 1: IReadBlock failed at X offset 0, Y offset 128: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729305_1051523.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729305_1051523.jpg, band 1: IReadBlock failed at X offset 0, Y offset 80: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729305_1051532.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729305_1051532.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729305_1051541.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729305_1051541.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729305_1051555.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729305_1051555.jpg, band 1: IReadBlock failed at X offset 0, Y offset 112: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729306_1051522.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729306_1051522.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729306_1051525.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729306_1051525.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729306_1051548.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729306_1051548.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729306_1051566.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729306_1051566.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729307_1051536.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729307_1051536.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729307_1051549.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729307_1051549.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729307_1051563.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729307_1051563.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729308_1051535.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729308_1051535.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729308_1051544.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729308_1051544.jpg, band 1: IReadBlock failed at X offset 0, Y offset 144: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729308_1051550.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729308_1051550.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729309_1051521.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729309_1051521.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729309_1051525.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729309_1051525.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729309_1051530.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729309_1051530.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729309_1051535.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729309_1051535.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729309_1051551.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729309_1051551.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729309_1051555.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729309_1051555.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729309_1051553.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729309_1051553.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729309_1051563.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729309_1051563.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729311_1051567.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729311_1051567.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729312_1051524.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729312_1051524.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729312_1051531.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729312_1051531.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729312_1051553.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729312_1051553.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729312_1051558.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729312_1051558.jpg, band 1: IReadBlock failed at X offset 0, Y offset 224: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729313_1051522.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729313_1051522.jpg, band 1: IReadBlock failed at X offset 0, Y offset 144: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729313_1051524.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729313_1051524.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729313_1051533.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729313_1051533.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729314_1051529.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729314_1051529.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729326_1051546.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729326_1051546.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729326_1051562.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729326_1051562.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729327_1051526.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729327_1051526.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729327_1051557.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729327_1051557.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729327_1051562.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729327_1051562.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729327_1051570.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729327_1051570.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        }
+      ]
+    },
+    "5": {
+      "status": "completed",
+      "tiles": 1600,
+      "success": 1555,
+      "skipped": 0,
+      "failed": 45,
+      "time_seconds": 83.26616144180298,
+      "failed_tiles": [
+        {
+          "tile": "tile_21_1729350_1051546.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729350_1051546.jpg, band 1: IReadBlock failed at X offset 0, Y offset 80: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729350_1051563.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729350_1051563.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729350_1051567.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729350_1051567.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729350_1051569.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729350_1051569.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729351_1051544.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729351_1051544.jpg, band 1: IReadBlock failed at X offset 0, Y offset 144: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729352_1051539.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729352_1051539.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729352_1051559.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729352_1051559.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729353_1051562.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729353_1051562.jpg, band 1: IReadBlock failed at X offset 0, Y offset 224: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729354_1051561.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729354_1051561.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729354_1051564.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729354_1051564.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729355_1051532.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729355_1051532.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729355_1051536.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729355_1051536.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729355_1051542.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729355_1051542.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729355_1051548.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729355_1051548.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729357_1051526.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729357_1051526.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729357_1051531.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729357_1051531.jpg, band 1: IReadBlock failed at X offset 0, Y offset 144: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729357_1051533.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729357_1051533.jpg, band 1: IReadBlock failed at X offset 0, Y offset 144: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729357_1051537.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729357_1051537.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729357_1051545.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729357_1051545.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729357_1051551.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729357_1051551.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729358_1051563.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729358_1051563.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729358_1051566.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729358_1051566.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729359_1051522.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729359_1051522.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729359_1051544.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729359_1051544.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729359_1051551.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729359_1051551.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729359_1051560.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729359_1051560.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729361_1051559.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729361_1051559.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729362_1051546.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729362_1051546.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729362_1051544.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729362_1051544.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729362_1051545.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729362_1051545.jpg, band 1: IReadBlock failed at X offset 0, Y offset 144: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729363_1051537.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729363_1051537.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729363_1051545.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729363_1051545.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729363_1051566.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729363_1051566.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729364_1051522.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729364_1051522.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729364_1051532.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729364_1051532.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729364_1051533.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729364_1051533.jpg, band 1: IReadBlock failed at X offset 0, Y offset 224: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729365_1051531.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729365_1051531.jpg, band 1: IReadBlock failed at X offset 0, Y offset 224: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729365_1051532.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729365_1051532.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729365_1051533.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729365_1051533.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729365_1051536.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729365_1051536.jpg, band 1: IReadBlock failed at X offset 0, Y offset 112: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729365_1051538.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729365_1051538.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729366_1051533.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729366_1051533.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729366_1051535.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729366_1051535.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729368_1051535.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729368_1051535.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729368_1051553.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729368_1051553.jpg, band 1: IReadBlock failed at X offset 0, Y offset 224: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        }
+      ]
+    },
+    "6": {
+      "status": "completed",
+      "tiles": 700,
+      "success": 700,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 25.184391021728516,
+      "failed_tiles": []
+    },
+    "7": {
+      "status": "completed",
+      "tiles": 700,
+      "success": 694,
+      "skipped": 0,
+      "failed": 6,
+      "time_seconds": 20.80077624320984,
+      "failed_tiles": [
+        {
+          "tile": "tile_21_1729209_1051576.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729209_1051576.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729212_1051571.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729212_1051571.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729212_1051584.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729212_1051584.jpg, band 1: IReadBlock failed at X offset 0, Y offset 144: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729228_1051576.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729228_1051576.jpg, band 1: IReadBlock failed at X offset 0, Y offset 192: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729235_1051582.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729235_1051582.jpg, band 1: IReadBlock failed at X offset 0, Y offset 240: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729237_1051571.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729237_1051571.jpg, band 1: IReadBlock failed at X offset 0, Y offset 224: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        }
+      ]
+    },
+    "8": {
+      "status": "completed",
+      "tiles": 700,
+      "success": 697,
+      "skipped": 0,
+      "failed": 3,
+      "time_seconds": 27.62943959236145,
+      "failed_tiles": [
+        {
+          "tile": "tile_21_1729271_1051580.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729271_1051580.jpg, band 1: IReadBlock failed at X offset 0, Y offset 160: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729276_1051577.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729276_1051577.jpg, band 1: IReadBlock failed at X offset 0, Y offset 176: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        },
+        {
+          "tile": "tile_21_1729280_1051581.jpg",
+          "error": "ERROR 1: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\nERROR 1: tile_21_1729280_1051581.jpg, band 1: IReadBlock failed at X offset 0, Y offset 208: libjpeg: Premature end of JPEG file (this error can be turned as a warning by setting GDAL_ERROR_ON_LIBJPEG_WARNING to FALSE)\n"
+        }
+      ]
+    },
+    "9": {
+      "status": "completed",
+      "tiles": 700,
+      "success": 700,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 24.81309485435486,
+      "failed_tiles": []
+    },
+    "10": {
+      "status": "completed",
+      "tiles": 448,
+      "success": 448,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 15.99424433708191,
+      "failed_tiles": []
+    }
+  },
+  "last_update": "2025-11-11 23:16:50"
+}

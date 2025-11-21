@@ -1,0 +1,146 @@
+{
+  "total_tiles": 24320,
+  "total_batches": 12,
+  "completed_batches": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "current_batch": 12,
+  "tiles_downloaded": 24036,
+  "tiles_failed": 0,
+  "start_time": "2025-11-13T08:33:56.734929",
+  "last_update": "2025-11-13 08:44:53",
+  "config": {
+    "x_start": 1729154,
+    "x_end": 1729409,
+    "y_start": 1051905,
+    "y_end": 1051999,
+    "zoom": 21,
+    "variant": 2,
+    "batch_size": 50,
+    "max_concurrent": 500,
+    "tiles_folder": "tiles_prioritas_batch_2"
+  },
+  "batch_details": {
+    "1": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2403,
+      "skipped": 97,
+      "failed": 0,
+      "time_seconds": 105.29211854934692,
+      "size_bytes": 345873852
+    },
+    "2": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2353,
+      "skipped": 147,
+      "failed": 0,
+      "time_seconds": 120.95489406585693,
+      "size_bytes": 315766265
+    },
+    "3": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2500,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 29.52232074737549,
+      "size_bytes": 50607904
+    },
+    "4": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2500,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 29.64513897895813,
+      "size_bytes": 51654223
+    },
+    "5": {
+      "status": "completed",
+      "tiles": 2500,
+      "success": 2499,
+      "skipped": 1,
+      "failed": 0,
+      "time_seconds": 40.706743001937866,
+      "size_bytes": 49205522
+    },
+    "6": {
+      "status": "completed",
+      "tiles": 300,
+      "success": 300,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 10.972965478897095,
+      "size_bytes": 5708584
+    },
+    "7": {
+      "status": "completed",
+      "tiles": 2250,
+      "success": 2217,
+      "skipped": 33,
+      "failed": 0,
+      "time_seconds": 86.96375799179077,
+      "size_bytes": 90651163
+    },
+    "8": {
+      "status": "completed",
+      "tiles": 2250,
+      "success": 2250,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 69.90051770210266,
+      "size_bytes": 87977925
+    },
+    "9": {
+      "status": "completed",
+      "tiles": 2250,
+      "success": 2250,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 66.05657005310059,
+      "size_bytes": 30251982
+    },
+    "10": {
+      "status": "completed",
+      "tiles": 2250,
+      "success": 2244,
+      "skipped": 6,
+      "failed": 0,
+      "time_seconds": 37.12809491157532,
+      "size_bytes": 47826587
+    },
+    "11": {
+      "status": "completed",
+      "tiles": 2250,
+      "success": 2250,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 45.53819298744202,
+      "size_bytes": 26683162
+    },
+    "12": {
+      "status": "completed",
+      "tiles": 270,
+      "success": 270,
+      "skipped": 0,
+      "failed": 0,
+      "time_seconds": 14.285948276519775,
+      "size_bytes": 1574442
+    }
+  },
+  "estimated_completion": "2025-11-13 08:44:53",
+  "avg_time_per_batch": 54.7611281077067
+}

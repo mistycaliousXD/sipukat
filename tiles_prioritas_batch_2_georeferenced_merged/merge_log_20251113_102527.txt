@@ -1,0 +1,23 @@
+============================================================
+GeoTIFF Merge Log
+============================================================
+Date: 2025-11-13 10:25:27
+Output file: tiles_prioritas_batch_2_georeferenced_merged\merged_map.tif
+
+Batches merged: 12
+
+Batch details:
+  Batch 001: 2,403 tiles
+  Batch 002: 2,353 tiles
+  Batch 003: 2,500 tiles
+  Batch 004: 2,500 tiles
+  Batch 005: 2,499 tiles
+  Batch 006: 300 tiles
+  Batch 007: 2,217 tiles
+  Batch 008: 2,250 tiles
+  Batch 009: 2,250 tiles
+  Batch 010: 2,244 tiles
+  Batch 011: 2,250 tiles
+  Batch 012: 270 tiles
+
+Total tiles: 24,036
